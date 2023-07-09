@@ -1,17 +1,15 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import './Login.css';
-// -----------------------
 import { useContext, useEffect, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import { AuthContext } from '../../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 
 
-// -------------------------------------
+
 
 const Login = () => {
 
@@ -45,7 +43,7 @@ const Login = () => {
     };
 
 
-    // ----------------------------Login
+    // ----------------------------Login------------
 
     const [disabled, setDisabled] = useState(true);
 
@@ -96,7 +94,7 @@ const Login = () => {
     }
 
 
-    // ---------------------------------
+    // -----------------------Animation js-----------------
 
 
     React.useEffect(() => {
@@ -115,36 +113,6 @@ const Login = () => {
         });
     }, []);
 
-    // useEffect(() => {
-    //     const signUpLink = document.querySelector('.link .signup-link');
-    //     const signInLink = document.querySelector('.link .signin-link');
-
-    //     const handleClickSignUp = () => {
-    //       // Your logic here
-    //     };
-
-    //     const handleClickSignIn = () => {
-    //       // Your logic here
-    //     };
-
-    //     if (signUpLink) {
-    //       signUpLink.addEventListener('click', handleClickSignUp);
-    //     }
-
-    //     if (signInLink) {
-    //       signInLink.addEventListener('click', handleClickSignIn);
-    //     }
-
-    //      return () => {
-    //       if (signUpLink) {
-    //         signUpLink.removeEventListener('click', handleClickSignUp);
-    //       }
-    //       if (signInLink) {
-    //         signInLink.removeEventListener('click', handleClickSignIn);
-    //       }
-    //     };
-    //   }, []);
-
 
     return (
         <div>
@@ -153,27 +121,32 @@ const Login = () => {
             </Helmet>
             <div className='login'>
                 <div className="wrapper">
+                    {/* --------SignUp Start-- */}
                     <div className="form-container sign-up">
                         <form onSubmit={handleSubmit(onSubmit)} action="#">
                             <h2>sign up</h2>
 
-                            {/* ------------------ */}
+                            {/* --------Photo URL-- */}
+
                             <div className="form-group">
-                              
+
                                 <input type="text" {...register("photoURL", { required: true })} required />
                                 {errors.photoURL && <span className="text-red-600">Photo URL is required</span>}
                                 <label >Photo URL</label>
-                                </div>                          
+                            </div>
 
+                            {/* --------name-- */}
 
                             <div className="form-group">
-                                
+
                                 <input type="text"  {...register("name", { required: true })} required />
                                 {errors.name && <span className="text-red-600">Name is required</span>}
                                 <label >name</label>
                                 <i className="fas fa-user"></i>
 
                             </div>
+
+                            {/* --------Email-- */}
                             <div className="form-group">
                                 <input type="email"  {...register("email", { required: true })} required />
                                 {errors.email && <span className="text-red-600">Email is required</span>}
@@ -182,18 +155,19 @@ const Login = () => {
                             </div>
                             <div className="form-group">
                                 <input type="password"
-                                {...register("password", { required: true,
-                                    minLength:6,
-                                     maxLength: 20, 
-                                     pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
-   
-                                 })}
-                                
-                                required />
-                                      {errors.password?.type === 'required' && <p className="text-red-600">Password must be 6 characters</p>}
-                            {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6  characters</p>}
-                            {errors.password?.type === 'maxLength' && <p className="text-red-600">Password must be less then 20 characters</p>}
-                            {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one upper case, one lower case, one number and one special characters </p>}
+                                    {...register("password", {
+                                        required: true,
+                                        minLength: 6,
+                                        maxLength: 20,
+                                        pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
+
+                                    })}
+
+                                    required />
+                                {errors.password?.type === 'required' && <p className="text-red-600">Password must be 6 characters</p>}
+                                {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6  characters</p>}
+                                {errors.password?.type === 'maxLength' && <p className="text-red-600">Password must be less then 20 characters</p>}
+                                {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one upper case, one lower case, one number and one special characters </p>}
                                 <label>password</label>
                                 <i className="fas fa-lock"></i>
                             </div>
@@ -204,32 +178,33 @@ const Login = () => {
                             </div>
                         </form>
                     </div>
+                    {/* -------------------Login Start------------ */}
                     <div className="form-container sign-in">
                         <form onSubmit={handleLogin} action="sign">
                             <h2>login</h2>
                             <div className="form-group">
                                 <input type="email"
-                                name='email'
-                                required />
+                                    name='email'
+                                    required />
                                 <i className="fas fa-user"></i>
                                 <label >Email</label>
                             </div>
                             <div className="form-group">
                                 <input type="password"
-                                name='password'
-                                required />
+                                    name='password'
+                                    required />
                                 <i className="fas fa-lock"></i>
                                 <label >password</label>
                             </div>
                             <div className="form-group">
-                               <div className='pb-4 font-bold'>
-                               <LoadCanvasTemplate />
-                               </div>
-                               
-                                <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="type the captcha above" className='text-black'  />
-                                
+                                <div className='pb-4 font-bold'>
+                                    <LoadCanvasTemplate />
+                                </div>
+
+                                <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="type the captcha above" className='text-black' />
+
                             </div>
-                            
+
                             <div className="forgot-pass pt-4">
                                 <a href="#" className="label-text-alt link link-hover ">forgot password?</a>
                             </div>
